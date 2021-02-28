@@ -1,4 +1,5 @@
 #include "paillier.h"
+#include <gmp.h>
 
 void encrypt(mpz_t cyphered, mpz_t n, mpz_t plain){
     mpz_t r; //random integer
