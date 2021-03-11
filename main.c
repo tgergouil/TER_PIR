@@ -24,12 +24,12 @@ void main(int argc, char *argv[]){
         size = mpz_sizeinbase (intg, 2); //get a random integer between 0 and 2^bcnt - 1
     } while(size != 2048);
 
-    gmp_printf ("An mpz with %lu bits: %Zd\n", size, intg);
-    
-    mpz_t p; //integer
+    // gmp_printf ("An mpz with %lu bits: %Zd\n", size, intg);
+    //integer
+    mpz_t p; 
     mpz_init2(p, bcnt);
-    
-    mpz_nextprime(p, intg); //takes the next prime
+    //takes the next prime
+    mpz_nextprime(p, intg); 
 
     mpz_t q;
     mpz_init2(q, bcnt);
@@ -38,7 +38,7 @@ void main(int argc, char *argv[]){
     mpz_t n;
     mpz_init(n);
     mpz_mul(n, p, q);
-
+    
     /** DELETE BEFORE **/
 
     /** TEST ENCRYPTION **/
@@ -46,7 +46,8 @@ void main(int argc, char *argv[]){
     mpz_t cyphered, plain;
 
     mpz_init(cyphered);
-    mpz_init2(plain, 1234);
+    mpz_init(plain);
+    mpz_set_ui(plain, 1234446);
     
     encrypt(cyphered, n, plain);
     
