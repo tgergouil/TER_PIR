@@ -54,7 +54,6 @@ void main(int argc, char *argv[]){
     mpz_pow_ui(n_square, n, 2);
 
     /** TEST ENCRYPTION **/
-    printf("\n\n*****************************************************************\n\n");
     mpz_t cyphered, plain;
 
     mpz_init(cyphered);
