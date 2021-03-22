@@ -29,7 +29,7 @@ void encrypt(mpz_t cyphered, mpz_t n, mpz_t plain, mpz_t g, mpz_t n_square){
     mpz_clears(r, c1, c2, NULL);
 }
 
-void decrypt(mpz_t plain, mpz_t n, mpz_t p, mpz_t q, mpz_t c, mpz_t g, mpz_t n_square){
+void decrypt(mpz_t plain, mpz_t n, mpz_t p, mpz_t q, mpz_t c, mpz_t g, mpz_t n_square, mpz_t p_minus, mpz_t q_minus, mpz_t lambda){
 
     /********************** INITIALIZATIONS *****************/
 
@@ -37,15 +37,6 @@ void decrypt(mpz_t plain, mpz_t n, mpz_t p, mpz_t q, mpz_t c, mpz_t g, mpz_t n_s
     mpz_inits(p_minus, q_minus, c1, c2, lambda, NULL);
 
     /********************** DECRYPTION **********************/
-
-        // p_minus = p - 1
-    mpz_sub_ui(p_minus, p, 1);
-
-        //q_minus = q - 1
-    mpz_sub_ui(q_minus, q, 1);
-    
-        //lambda = lcm(p-1, q-1)
-    mpz_lcm(lambda, p_minus, q_minus); 
 
         //c1 = c^lambda mod n^2
     mpz_powm(c1, c, lambda, n_square); 
