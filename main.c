@@ -60,7 +60,6 @@ void main(int argc, char *argv[]){
     mpz_lcm(lambda, p_minus, q_minus); 
 
 
-
     mpz_clears(p, q, n, g, n_square, ciphered, plain, NULL);
     return ;
 }
