@@ -24,7 +24,7 @@ int getPrimes(unsigned long int seed, mpz_t p, mpz_t q){
 
     //gmp_printf ("An mpz with %lu bits: %Zd\n", size, intg);
     
-    mpz_init2(p, bcnt);y
+    mpz_init2(p, bcnt);
     mpz_nextprime(p, intg); //takes the next prime
     //gmp_printf("The next prime: %Zd", p);
 
