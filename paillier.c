@@ -33,8 +33,8 @@ void decrypt(mpz_t plain, mpz_t n, mpz_t p, mpz_t q, mpz_t c, mpz_t g, mpz_t n_s
 
     /********************** INITIALIZATIONS *****************/
 
-    mpz_t p_minus, q_minus, c1, c2, lambda;
-    mpz_inits(p_minus, q_minus, c1, c2, lambda, NULL);
+    mpz_t c1, c2;   
+    mpz_inits(c1, c2, NULL);
 
     /********************** DECRYPTION **********************/
 
