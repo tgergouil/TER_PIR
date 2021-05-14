@@ -59,7 +59,7 @@ void decrypt(mpz_t plain, mpz_t n, mpz_t p, mpz_t q, mpz_t c, mpz_t g, mpz_t n_s
 
     /********************** CLEARING ************************/
 
-    mpz_clears(p_minus, q_minus, c1, c2, lambda, NULL);
+    mpz_clears(c1, c2, NULL);
 }
 
 
