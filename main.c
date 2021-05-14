@@ -38,8 +38,8 @@ void main(int argc, char *argv[]){
     } 
 
     //p and q are initialized in getPrime
-    mpz_t p, q, n, g, n_square, p_minus, q_minus, lambda;
-    mpz_inits(n, g, n_square, p_minus, q_minus, lambda, NULL);
+    mpz_t p, q, n, g, n_square, p_minus, q_minus, lambda, ciphered, plain;
+    mpz_inits(n, g, n_square, p_minus, q_minus, lambda, ciphered, plain, NULL);
 
     char* ptr;
     unsigned long int seed = strtol(argv[1], &ptr, 10);
@@ -59,20 +59,9 @@ void main(int argc, char *argv[]){
         //lambda = lcm(p-1, q-1)
     mpz_lcm(lambda, p_minus, q_minus); 
 
-    /** TEST ENCRYPTION **/
-    mpz_t cyphered, plain;
 
-    mpz_init(cyphered);
-    mpz_init(plain);
-    mpz_set_ui(plain, 123456789012345);
-    
-    encrypt(cyphered, n, plain, g, n_square);
-    
-    /** TEST DECRYPTION **/
-    decrypt(plain, n, p, q, cyphered, g, n_square, p_minus, q_minus, lambda);
-    gmp_printf("Ca marche ? %Zd\n", plain);
 
-    mpz_clears(p, q, n, g, n_square, cyphered, plain, NULL);
+    mpz_clears(p, q, n, g, n_square, ciphered, plain, NULL);
     return ;
 }
 

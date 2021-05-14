@@ -1,7 +1,7 @@
 #include "paillier.h"
 #include <gmp.h>
 
-void encrypt(mpz_t cyphered, mpz_t n, mpz_t plain, mpz_t g, mpz_t n_square){
+void encrypt(mpz_t ciphered, mpz_t n, mpz_t plain, mpz_t g, mpz_t n_square){
 
     /********************** INITIALIZATIONS *****************/
     
@@ -18,10 +18,10 @@ void encrypt(mpz_t cyphered, mpz_t n, mpz_t plain, mpz_t g, mpz_t n_square){
         // c2 = r^n mod n^2
     mpz_powm(c2, r, n, n_square); 
 
-        //cyphered = c1 * c2
-    mpz_mul(cyphered, c1, c2); 
-        //cyphered = g^m * r^n mod n^2
-    mpz_mod(cyphered, cyphered, n_square); 
+        //ciphered = c1 * c2
+    mpz_mul(ciphered, c1, c2); 
+        //ciphered = g^m * r^n mod n^2
+    mpz_mod(ciphered, ciphered, n_square); 
 
 
     /********************** CLEARING ************************/
