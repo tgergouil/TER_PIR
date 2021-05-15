@@ -9,7 +9,7 @@
  *      ciphered is the variable in which the result is stored
  *      n is the public key such as n = pq
  *      g = n+1
- *      n_square = n²
+ *      n_square = n^2
  * */  
 void encrypt(mpz_t plain, mpz_t ciphered, mpz_t n, mpz_t g, mpz_t n_square);
 
@@ -20,9 +20,9 @@ void encrypt(mpz_t plain, mpz_t ciphered, mpz_t n, mpz_t g, mpz_t n_square);
  *      n is the public key such as n = pq
  *      q and p are random large primes and the factors of the private key
  *      g = n+1
- *      n_square = n²
+ *      n_square = n^2
  *      p_minus = p-1
  *      q_minus = q-1
- *      lambda is the Carmichael's function on n : lambda = ppcm(p-1, q-1)
+ *      lambda is the Carmichael's function on n : lambda = lcm(p-1, q-1)
  * */
 void decrypt(mpz_t plain, mpz_t n, mpz_t p, mpz_t q, mpz_t ciphered, mpz_t g, mpz_t n_square, mpz_t lambda);

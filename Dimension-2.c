@@ -66,7 +66,7 @@ void f(int l, mpz_t* ALPHA, mpz_t* SIGMA, mpz_t n, mpz_t u, mpz_t v, mpz_t n_squ
     free(ALPHA2);
 } 
 
-void DDim2(mpz_t u, mpz_t v, mpz_t plain, mpz_t n, mpz_t p, mpz_t q, mpz_t c, mpz_t g, mpz_t n_square, mpz_t lambda){
+void DDim2(mpz_t u, mpz_t v, mpz_t plain, mpz_t n, mpz_t p, mpz_t q, mpz_t g, mpz_t n_square, mpz_t lambda){
    mpz_t v1,u1;
    mpz_inits(u1,v1,NULL);
 

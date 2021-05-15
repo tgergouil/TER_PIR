@@ -88,11 +88,9 @@ void main(int argc, char *argv[]){
     decrypt(plainResult, n, p, q, ciphered, g, n_square, lambda);
     gmp_printf("Decrypted into %Zd\n", plainResult);
 
-    //mpz_clears(p, q, n, g, n_square, ciphered, plain, NULL);
-
     /** TEST PIR **/
 
-    int l = 9;
+    int l = 10;
     int N, dimension;
 
     printf("\nPIR tests with l = %d\n", l);
@@ -106,8 +104,9 @@ void main(int argc, char *argv[]){
     N = powX(l, dimension);
 
     //Must be between 0 and l-1 included
-    int index_i = 8;
+    int index_i = 9;
 
+    /** Initialization of all variables **/
     mpz_t z;
     mpz_init(z);
 
@@ -126,17 +125,22 @@ void main(int argc, char *argv[]){
 
     printf("Asking for index %d, expected value of %d.\n", index_i, index_i);
 
+    /** Initialization **/
     EDim1(m, n, N, c, g, n_square);
-    sigmaf(c, N , x, z, n_square);
 
-    DDim1(N, plain, n, p, q, z, g, n_square, lambda);
+    /** Filtering / Splitting-and-then-filtering **/
+    sigmaf(c, N, x, z, n_square);
 
+    /** Reconstructing **/
+    DDim1(plain, n, p, q, z, g, n_square, lambda);
+    
     gmp_printf("Database answer: %Zd\n", plain);
 
     for (int i=0; i<N; i++){
         mpz_clears(m[i], c[i], NULL);
     }
 
+    /** Clearing **/
     free(m);
     free(c);
 
@@ -152,6 +156,7 @@ void main(int argc, char *argv[]){
     index_i = 3;
     int index_j = 6;
 
+    /** Initialization of all variables **/
     mpz_t c2,u,v;
     mpz_inits(c2,u,v,NULL);
 
@@ -175,14 +180,16 @@ void main(int argc, char *argv[]){
     mpz_set_ui(v, 1);
 
     printf("Asking for index (%d,%d) expected value of %d.\n", index_i, index_j, index_i*l + index_j);
-
+    
+    /** Initialization **/
     EDim2(ALPHA, n, l, BETA, g, n_square, index_i, index_j);
     
+    /** Filtering / Splitting-and-then-filtering **/
     phi(BETA, x2, SIGMA, l, n_square, c2, BETA2);
-    
     f(l, ALPHA, SIGMA, n, u, v, n_square);
     
-    DDim2(u, v, plain, n, p, q, z, g, n_square, lambda);
+    /** Reconstructing **/
+    DDim2(u, v, plain, n, p, q, g, n_square, lambda);
     
     gmp_printf("Database answer: %Zd\n", plain);
 
@@ -195,6 +202,7 @@ void main(int argc, char *argv[]){
         mpz_clears(x2[i], NULL);
     }
 
+    /** Clearing **/
     free(ALPHA);
     free(BETA);
     free(SIGMA);
@@ -215,6 +223,7 @@ void main(int argc, char *argv[]){
     index_j = 8;
     int index_k = 4;
 
+    /** Initialization of all variables **/
     mpz_t c3,uu3,vu3,uv3,vv3;
     mpz_inits(c3, uu3, vu3, uv3, vv3, NULL);
 
@@ -254,16 +263,18 @@ void main(int argc, char *argv[]){
     mpz_set_ui(uv3, 1);
     mpz_set_ui(vu3, 1);
 
+    /** Initialization **/
     EDim3(ALPHA3, GAMMA3, n, l, BETA3, g, index_k, n_square, index_i, index_j);
-
+    /** Filtering / Splitting-and-then-filtering **/
     fphi(BETA3, x3, SIGMA3, l, n_square, c3, BETA3SAVE);
-
     ftot(l, ALPHA3, GAMMA3 , SIGMA3, n,u3, v3, n_square, uu3, uv3, vu3, vv3);
-
-    DDim3(uu3, uv3, vu3, vv3,plain, n, p, q, c3, g, n_square, lambda);
+    
+    /** Reconstructing **/
+    DDim3(uu3, uv3, vu3, vv3,plain, n, p, q, g, n_square, lambda);
 
     gmp_printf("Database answer: %Zd\n", plain);
-
+    
+    /** Clearing **/
     for(int i=0; i<l; i++){
         mpz_clears(ALPHA3[i], BETA3[i], BETA3SAVE[i], u3[i], v3[i], GAMMA3[i], NULL);
 

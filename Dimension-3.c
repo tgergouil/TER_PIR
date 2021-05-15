@@ -27,12 +27,12 @@ void ftot(int l, mpz_t* ALPHA, mpz_t* GAMMA, mpz_t** SIGMA, mpz_t n, mpz_t* u, m
     f(l, GAMMA, v, n, vu, vv, n_square);
 } 
 
-void DDim3(mpz_t uu,mpz_t uv,mpz_t vu,mpz_t vv,mpz_t plain, mpz_t n, mpz_t p, mpz_t q, mpz_t c, mpz_t g, mpz_t n_square, mpz_t lambda){
+void DDim3(mpz_t uu,mpz_t uv,mpz_t vu,mpz_t vv,mpz_t plain, mpz_t n, mpz_t p, mpz_t q, mpz_t g, mpz_t n_square, mpz_t lambda){
    mpz_t vv1,uu1;
    mpz_inits(vv1, uu1, NULL);
 
-   DDim2(vu, vv, vv1, n, p, q, c, g, n_square, lambda);
-   DDim2(uu, uv, uu1, n, p, q, c, g, n_square, lambda);
+   DDim2(vu, vv, vv1, n, p, q, g, n_square, lambda);
+   DDim2(uu, uv, uu1, n, p, q, g, n_square, lambda);
 
    mpz_mul(uu1, uu1, n);
    mpz_add(uu1, uu1, vv1);
