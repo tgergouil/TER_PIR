@@ -8,7 +8,7 @@ void encrypt(mpz_t ciphered, mpz_t n, mpz_t plain, mpz_t g, mpz_t n_square){
     mpz_t r, c1, c2; 
     mpz_inits(r, c1, c2, NULL);
 
-        //r is s set to 1 for debugging purpose 
+        //r is set to 1 for debugging purpose 
     mpz_set_ui(r, 1);
     /********************** ENCRYPTION **********************/
 
