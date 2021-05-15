@@ -5,33 +5,6 @@
 #include <math.h>
 #include <gmp.h>
 
-int var2i(int l, int m){
-   int i = m/l; 
-   return i;
-} 
-
-int var2j(int l, int m){
-   int j = m%l; 
-   return j;
-} 
-
-int var3i(int l, int m){
-   int i = m/(l*l); 
-   return i;
-} 
-
-int var3j(int l, int m){
-   int m2 = m%(l*l);
-   int j = m2/l; 
-   return j;
-} 
-
-int var3k(int l, int m){
-   int m2 = m%(l*l);
-   int k = m2%l; 
-   return k;
-}
-
 int powX(int x, int n){
     int res = 1;
 
@@ -122,6 +95,8 @@ void main(int argc, char *argv[]){
     int l = 9;
     int N, dimension;
 
+    printf("\nPIR tests with l = %d\n", l);
+
     /** TEST 1-HYPERCUBE **/
 
     printf("\nPIR 1 dimension test:\n");
@@ -130,8 +105,8 @@ void main(int argc, char *argv[]){
 
     N = powX(l, dimension);
 
-    //Must not be greater than l
-    int index_i = 5;
+    //Must be between 0 and l-1 included
+    int index_i = 8;
 
     mpz_t z;
     mpz_init(z);
@@ -142,14 +117,14 @@ void main(int argc, char *argv[]){
 
     for (int i=0; i<N; i++){
         mpz_inits(m[i], c[i], x[i], NULL);
-        mpz_set_ui(x[i], i*i);
+        mpz_set_ui(x[i], i);
         mpz_set_ui(m[i], 0);
     }
 
     mpz_set_ui(m[index_i], 1);
     mpz_set_ui(z, 1);
 
-    printf("Asking for index %d, expected value of %d.\n", index_i, index_i*index_i);
+    printf("Asking for index %d, expected value of %d.\n", index_i, index_i);
 
     Hyp1(m, n, N, c, g, n_square);
     sigmaf(c, N , x, z, n_square);
@@ -173,9 +148,9 @@ void main(int argc, char *argv[]){
 
     N = powX(l, dimension);
     
-    //Must not be greater than l
-    index_i = 5;
-    int index_j = 4;
+    //Must be between 0 and l-1 included
+    index_i = 3;
+    int index_j = 6;
 
     mpz_t c2,u,v;
     mpz_inits(c2,u,v,NULL);
@@ -229,77 +204,90 @@ void main(int argc, char *argv[]){
 
     /** TEST 3-HYPERCUBE **/
 
-    // mpz_t c3,uu3,vu3,uv3,vv3;
-    // mpz_inits(c3, uu3, vu3, uv3, vv3, NULL);
+    printf("\nPIR 3 dimensions test:\n");
 
-    // mpz_t* ALPHA3 = malloc(sizeof(mpz_t)*l);
-    // mpz_t* BETA3 = malloc(sizeof(mpz_t)*l);
-    // mpz_t** SIGMA3 = malloc(sizeof(mpz_t*)*l);
-    // mpz_t* GAMMA3 = malloc(sizeof(mpz_t)*l);
-    // mpz_t* BETA4 = malloc(sizeof(mpz_t)*l);
-    // mpz_t** x3 = malloc(sizeof(mpz_t*)*l);
-    // mpz_t* u3 = malloc(sizeof(mpz_t)*l);
-    // mpz_t* v3 = malloc(sizeof(mpz_t)*l);
+    dimension = 3;
+
+    N = powX(l, dimension);
     
-    // for (int i=0; i<l; i++){
+    //Must be between 0 and l-1 included
+    index_i = 0;
+    index_j = 8;
+    int index_k = 4;
+
+    mpz_t c3,uu3,vu3,uv3,vv3;
+    mpz_inits(c3, uu3, vu3, uv3, vv3, NULL);
+
+    mpz_t* ALPHA3 = malloc(sizeof(mpz_t)*l);
+    mpz_t* BETA3 = malloc(sizeof(mpz_t)*l);
+    mpz_t* GAMMA3 = malloc(sizeof(mpz_t)*l);
+    mpz_t** SIGMA3 = malloc(sizeof(mpz_t*)*l);
+    mpz_t* BETA3SAVE = malloc(sizeof(mpz_t)*l);
+    mpz_t** x3 = malloc(sizeof(mpz_t*)*l);
+    mpz_t* u3 = malloc(sizeof(mpz_t)*l);
+    mpz_t* v3 = malloc(sizeof(mpz_t)*l);
+
+    for (int i=0; i<l; i++){
         
-    //     x3[i] = malloc(sizeof(mpz_t)*N);
+        x3[i] = malloc(sizeof(mpz_t)*l*l);
         
-    //     SIGMA3[i] = malloc(sizeof(mpz_t)*l);
+        SIGMA3[i] = malloc(sizeof(mpz_t)*l);
         
-    //     for(int j=0; j<N; j++){
-    //         mpz_init(x3[i][j]);
-    //         int e = i*l+j+1;
-    //         mpz_set_ui(x3[i][j], e);
+        for(int j=0; j<(l*l); j++){
+            mpz_init(x3[i][j]);
+            mpz_set_ui(x3[i][j], i + j*l);
+            
+            if(j<l){
+                mpz_init(SIGMA3[i][j]);
+            } 
+        } 
 
-    //         if(j<3){
-    //             mpz_init(SIGMA3[i][j]);
-    //         } 
-    //     } 
+        mpz_inits(ALPHA3[i], BETA3[i], BETA3SAVE[i], u3[i], v3[i], GAMMA3[i], NULL);
+        mpz_set_ui(u3[i], 1);
+        mpz_set_ui(v3[i], 1);
+    }
 
-    //     mpz_inits(ALPHA3[i], BETA3[i], BETA4[i], u3[i], v3[i], GAMMA3[i], NULL);
-    //     mpz_set_ui(u3[i], 1);
-    //     mpz_set_ui(v3[i], 1);
-    // }
+    printf("Asking for index (%d,%d,%d) expected value of %d.\n", index_i, index_j, index_k, index_k + index_j*l + index_i*l*l);
 
-    // int k=2;
+    mpz_set_ui(uu3, 1);
+    mpz_set_ui(vv3, 1);
+    mpz_set_ui(uv3, 1);
+    mpz_set_ui(vu3, 1);
 
-    // mpz_set_ui(uu3, 1);
-    // mpz_set_ui(vv3, 1);
-    // mpz_set_ui(uv3, 1);
-    // mpz_set_ui(vu3, 1);
+    Hyp3(ALPHA3, GAMMA3, n, l, BETA3, g, index_k, n_square, index_i, index_j);
 
-    // Hyp3(ALPHA3, GAMMA3, n, l, BETA3, g, k, n_square, i1, j);
+    fphi(BETA3, x3, SIGMA3, l, n_square, c3, BETA3SAVE);
 
-    // fphi( BETA3, x3, SIGMA3, l, n_square, c3, BETA3);
+    ftot(l, ALPHA3, GAMMA3 , SIGMA3, n,u3, v3, n_square, uu3, uv3, vu3, vv3);
 
-    // ftot(l, ALPHA3, GAMMA3 , SIGMA3, n,u3, v3, n_square, uu3, uv3, vu3, vv3);
+    sHyp3(uu3, uv3, vu3, vv3,plain, n, p, q, c3, g, n_square, lambda);
 
-    // sHyp3( uu3, uv3, vu3,vv3,plain,  n,  p,  q,  c3,  g,  n_square,   lambda);
+    gmp_printf("Database answer: %Zd\n", plain);
 
-    // gmp_printf("Ca marche le 3 ? %Zd\n", plain); 
+    for(int i=0; i<l; i++){
+        mpz_clears(ALPHA3[i], BETA3[i], BETA3SAVE[i], u3[i], v3[i], GAMMA3[i], NULL);
 
-    // for(int i=0; i<l; i++){
-    //     mpz_clears(ALPHA3[i], BETA3[i], BETA4[i], u3[i], v3[i], GAMMA3[i], NULL);
+        for(int j=0; j<l*l; j++){
+            mpz_clears(x3[i][j], NULL);
+            if(j<l){
+                mpz_clears(SIGMA3[i][j], NULL);
+            } 
+        }  
 
-    //     for(int j=0; j<N; j++){
-    //         mpz_clears(x3[i][j], SIGMA3[i][j], NULL);
-    //     }  
+        free(x3[i]);
+        free(SIGMA3[i]);
+    }
 
-    //     free(x3[i]);
-    //     free(SIGMA3[i]);
-    // }
-
-    // free(GAMMA3);
-    // free(ALPHA3);
-    // free(BETA3);
-    // free(SIGMA3);
-    // free(x3);
-    // free(BETA4);
-    // free(u3);
-    // free(v3);
+    free(GAMMA3);
+    free(ALPHA3);
+    free(BETA3);
+    free(SIGMA3);
+    free(x3);
+    free(BETA3SAVE);
+    free(u3);
+    free(v3);
     
-    // mpz_clears(c3, uu3, vu3, uv3,vv3, p, q, n, g, n_square, ciphered, plain, NULL);
+    mpz_clears(c3, uu3, vu3, uv3,vv3, p, q, n, g, n_square, ciphered, plain, NULL);
     
     return;
 }
