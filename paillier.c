@@ -41,7 +41,7 @@ void decrypt(mpz_t plain, mpz_t n, mpz_t p, mpz_t q, mpz_t c, mpz_t g, mpz_t n_s
         //c1 = c^lambda mod n^2
     mpz_powm(c1, c, lambda, n_square); 
 
-        //c2 = g^lambda mod n^2 --> inutile à cause de g = n + 1, ça fait autre chose mais je sais plus quoi
+        //c2 = g^lambda mod n^2
     mpz_powm(c2, g, lambda, n_square); 
 
         //L(c1, n)
