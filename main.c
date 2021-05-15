@@ -40,10 +40,10 @@ int getPrimes(unsigned long int seed, mpz_t p, mpz_t q){
     return EXIT_SUCCESS;
 } 
 
-void main(int argc, char *argv[]){
+int main(int argc, char *argv[]){
     if(argc != 2){
         printf("Provide one argument: a random seed\n");
-        return;
+        return EXIT_FAILURE;
     }
 
     printf("Initialization\n");
@@ -300,6 +300,6 @@ void main(int argc, char *argv[]){
     
     mpz_clears(c3, uu3, vu3, uv3,vv3, p, q, n, g, n_square, ciphered, plain, NULL);
     
-    return;
+    return EXIT_SUCCESS;
 }
 

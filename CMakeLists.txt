@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.0)
 
-project(testPIR)
+project(testPIR C)
+
+set(CMAKE_C_FLAGS "-std=c99 -g -Wall")
 
 set(SRCS
     main.c
@@ -17,15 +19,5 @@ set(HEADERS
     Dimension-3.h   
     )
 
-add_executable(paillier   ${SRCS} ${HEADERS})
-add_executable(Dimension-1  ${SRCS} ${HEADERS})
-add_executable(Dimension-2  ${SRCS} ${HEADERS})
-add_executable(Dimension-3  ${SRCS} ${HEADERS})
-target_link_libraries(paillier  gmp)
-target_link_libraries(Dimension-1  gmp)
-target_link_libraries(Dimension-2  gmp)
-target_link_libraries(Dimension-3 gmp)
-install(TARGETS paillier  DESTINATION bin)
-install(TARGETS Dimension-1  DESTINATION bin)
-install(TARGETS Dimension-2  DESTINATION bin)
-install(TARGETS Dimension-3  DESTINATION bin)
+add_executable(testPIR   ${SRCS} ${HEADERS})
+target_link_libraries(testPIR  gmp)
