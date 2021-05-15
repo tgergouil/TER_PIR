@@ -1,7 +1,7 @@
 #include "paillier.h"
-#include "1-hypercube.h"
-#include "2-hypercube.h"
-#include "3-hypercube.h"
+#include "Dimension-1.h"
+#include "Dimension-2.h"
+#include "Dimension-3.h"
 #include <math.h>
 #include <gmp.h>
 
@@ -126,10 +126,10 @@ void main(int argc, char *argv[]){
 
     printf("Asking for index %d, expected value of %d.\n", index_i, index_i);
 
-    Hyp1(m, n, N, c, g, n_square);
+    EDim1(m, n, N, c, g, n_square);
     sigmaf(c, N , x, z, n_square);
 
-    sHyp1(N, plain, n, p, q, z, g, n_square, lambda);
+    DDim1(N, plain, n, p, q, z, g, n_square, lambda);
 
     gmp_printf("Database answer: %Zd\n", plain);
 
@@ -176,13 +176,13 @@ void main(int argc, char *argv[]){
 
     printf("Asking for index (%d,%d) expected value of %d.\n", index_i, index_j, index_i*l + index_j);
 
-    Hyp2(ALPHA, n, l, BETA, g, n_square, index_i, index_j);
+    EDim2(ALPHA, n, l, BETA, g, n_square, index_i, index_j);
     
     phi(BETA, x2, SIGMA, l, n_square, c2, BETA2);
     
     f(l, ALPHA, SIGMA, n, u, v, n_square);
     
-    sHyp2(u, v, plain, n, p, q, z, g, n_square, lambda);
+    DDim2(u, v, plain, n, p, q, z, g, n_square, lambda);
     
     gmp_printf("Database answer: %Zd\n", plain);
 
@@ -254,13 +254,13 @@ void main(int argc, char *argv[]){
     mpz_set_ui(uv3, 1);
     mpz_set_ui(vu3, 1);
 
-    Hyp3(ALPHA3, GAMMA3, n, l, BETA3, g, index_k, n_square, index_i, index_j);
+    EDim3(ALPHA3, GAMMA3, n, l, BETA3, g, index_k, n_square, index_i, index_j);
 
     fphi(BETA3, x3, SIGMA3, l, n_square, c3, BETA3SAVE);
 
     ftot(l, ALPHA3, GAMMA3 , SIGMA3, n,u3, v3, n_square, uu3, uv3, vu3, vv3);
 
-    sHyp3(uu3, uv3, vu3, vv3,plain, n, p, q, c3, g, n_square, lambda);
+    DDim3(uu3, uv3, vu3, vv3,plain, n, p, q, c3, g, n_square, lambda);
 
     gmp_printf("Database answer: %Zd\n", plain);
 

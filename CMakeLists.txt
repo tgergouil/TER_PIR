@@ -5,27 +5,27 @@ project(testPIR)
 set(SRCS
     main.c
     paillier.c
-    1-hypercube.c
-    2-hypercube.c
-    3-hypercube.c
+    Dimension-1.c
+    Dimension-2.c
+    Dimension-3.c
     )
     
 set(HEADERS
     paillier.h
-    1-hypercube.h
-    2-hypercube.h
-    3-hypercube.h   
+    Dimension-1.h
+    Dimension-2.h
+    Dimension-3.h   
     )
 
 add_executable(paillier   ${SRCS} ${HEADERS})
-add_executable(1-hypercube  ${SRCS} ${HEADERS})
-add_executable(2-hypercube  ${SRCS} ${HEADERS})
-add_executable(3-hypercube  ${SRCS} ${HEADERS})
+add_executable(Dimension-1  ${SRCS} ${HEADERS})
+add_executable(Dimension-2  ${SRCS} ${HEADERS})
+add_executable(Dimension-3  ${SRCS} ${HEADERS})
 target_link_libraries(paillier  gmp)
-target_link_libraries(1-hypercube  gmp)
-target_link_libraries(2-hypercube  gmp)
-target_link_libraries(3-hypercube gmp)
+target_link_libraries(Dimension-1  gmp)
+target_link_libraries(Dimension-2  gmp)
+target_link_libraries(Dimension-3 gmp)
 install(TARGETS paillier  DESTINATION bin)
-install(TARGETS 1-hypercube  DESTINATION bin)
-install(TARGETS 2-hypercube  DESTINATION bin)
-install(TARGETS 3-hypercube  DESTINATION bin)
+install(TARGETS Dimension-1  DESTINATION bin)
+install(TARGETS Dimension-2  DESTINATION bin)
+install(TARGETS Dimension-3  DESTINATION bin)
