@@ -28,10 +28,10 @@ void EDim2(mpz_t* ALPHA, mpz_t n, int l, mpz_t* BETA, mpz_t g, mpz_t n_square, i
  * param :
  *      BETA is the list of encrypted indexes
  *      x is the database
- *      SIGMA
+ *      SIGMA is the list that contains the result of the filtering 
  *      l is the cube root of the size of the database
  *      n_square = n^2
- *      BETA2
+ *      BETA2 transition list for the calculation of SIGMA
  * */
 void phi(mpz_t* BETA, mpz_t* x, mpz_t* SIGMA, int l, mpz_t n_square, mpz_t c, mpz_t*BETA2);
 
@@ -40,7 +40,7 @@ void phi(mpz_t* BETA, mpz_t* x, mpz_t* SIGMA, int l, mpz_t n_square, mpz_t c, mp
  * param :
  *      l is the cube root of the size of the database
  *      ALPHA is the list of encrypted indexes
- *      SIGMA
+ *      SIGMA is the list that contains the result of the filtering 
  *      n is the public key such as n = pq
  *      u,v are the answers
  *      n_square = n^2
