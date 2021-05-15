@@ -17,7 +17,7 @@
 void EDim3(mpz_t* ALPHA, mpz_t* GAMMA, mpz_t n, int l, mpz_t* BETA, mpz_t g, int k, mpz_t n_square, int i, int j);
 
 /**
- * This function performs .
+ * This function performs the Filtering step .
  * param :
  *      BETA is the list of encrypted indexes
  *      x is the database
@@ -29,7 +29,7 @@ void EDim3(mpz_t* ALPHA, mpz_t* GAMMA, mpz_t n, int l, mpz_t* BETA, mpz_t g, int
 void fphi(mpz_t* BETA, mpz_t** x, mpz_t** PHI, int l, mpz_t n_square, mpz_t c, mpz_t* BETA2);
 
 /**
- * This function performs .
+ * This function performs the Splitting-and-then-filtering step .
  * param :
  *      l is the cube root of the size of the database
  *      ALPHA is the list of encrypted indexes
